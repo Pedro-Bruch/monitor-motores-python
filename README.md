@@ -98,9 +98,26 @@ Esse código mostra a temperatura, corrente, vibração, rpm, alertas e potênci
     ```
 1. A última função é para exibir o painel.
 Nela aparece o nome do sistema, a versão, Data e hora da leitura (por isso importamos a biblioteca `datetime`). Depois ele imprime os motores que tiveram alertas, logo em seguida as estatisticas calculadas no tópico anterior.
+***
+5. Depois do painel, foi implementada uma função para a manutenção preventiva dos motores do programa:
+    ```py
+    def exibir_manutencao(motores):
+        plano = gerar_plano_manutencao(motores)
+        print("\nPLANO DE MANUTENCAO PREVENTIVA:")
+        print(f" - Parada imediata (CRITICO): {[m['id'] for m in plano['CRITICO']]}")
+        print(f" - Inspecao programada (ATENCAO): {[m['id'] for m in plano['ATENCAO']]}")
+        print(f" - Operacao estavel (NORMAL): {[m['id'] for m in plano['NORMAL']]}")
+
+
+    if __name__ == "__main__":
+        motores_validos = obter_leituras_validas(LEITURAS_MOTORES)
+        exibir_painel(motores_validos)
+        exibir_manutencao(motores_validos)
+    ```
 
 # Resumo
 Por fim, esse programa ele faz:
 - Mostra todos os motores, íncluindo o nível de alerta, temperatura, corrente, vibração e rpm. 
 - Caso o motor tenha um nível de alerta diferente de "normal", ele mostra aonde está o alerta do motor.
 - Mostra o resumo dos 4 motores, contendo a quantidade de motores, temperatura média, corrente média, potência total e maior temperatura.
+- Mostra quais motores estão em alerta crítico, alerta e normal.
