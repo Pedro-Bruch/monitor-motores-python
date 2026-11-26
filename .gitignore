@@ -226,3 +226,4 @@ __marimo__/
 .env
 *.log
 dados_sensiveis/
+.env.example
